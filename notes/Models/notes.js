@@ -11,6 +11,7 @@ const Note = sequelize.define(
         },
         category: DataTypes.STRING, // we don't have to pass a configuration object if we don't want to
         title: DataTypes.STRING, // we don't have to pass a configuration object if we don't want to
+        description: DataTypes.STRING,
         datePost: DataTypes.DATE,
         states: {
             type: DataTypes.ENUM,

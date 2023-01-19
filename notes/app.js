@@ -11,6 +11,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
 app.use("/api",notesRouter);
+app.use("/apiS",studentsRouter);
+
 
 app.listen(5001, async () => {
   console.log("Express web server running on port 5001");

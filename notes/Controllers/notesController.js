@@ -58,10 +58,10 @@ const insertNoteIntoDB = async (req, res) => {
 //UPDATE
 const updateNoteById = async (req, res) => {
   try {
-    const note = await Student.findByPk(req.params.id);
-    if (movie) {
+    const note = await Note.findByPk(req.params.id);
+    if (note) {
       const updateNote = await note.update(req.body); // update using the update() method provided by Sequelize on the returned PK object
-      // OBS: update on the found object and not on the "Movie" model
+      // OBS: update on the found object and not on the "Note" model
       return res.status(200).json(updateNote);
     } else {
       // if no entity exists, null is returned;
@@ -77,7 +77,7 @@ const updateNoteById = async (req, res) => {
 //DELETE
 const deleteNote = async (req, res) => {
   try {
-    const note = await Student.findByPk(req.params.id); // find by primary key => findByPK()
+    const note = await Note.findByPk(req.params.id); // find by primary key => findByPK()
     if (note) {
       // destroy() is mapped to "DELETE ... FROM ..."
       await note.destroy();
@@ -87,7 +87,7 @@ const deleteNote = async (req, res) => {
       // if no entity exists, null is returned;
       return res
         .status(404)
-        .json({ error: `Movie with id ${req.params.id} not found` });
+        .json({ error: `Note with id ${req.params.id} not found` });
     }
   } catch (err) {
     res.status(500).json(err);

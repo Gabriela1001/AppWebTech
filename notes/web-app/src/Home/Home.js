@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -14,7 +13,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-
+import React, { useEffect } from 'react';
+import  { useState } from 'react'
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -32,10 +32,19 @@ export default function RecipeReviewCard() {
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
+  let x = new Array() ; 
+	useEffect(() => {
+	  fetch('http://localhost:5001/api/notes')
+	  .then(response => response.json())
+	  .then(json => {
+		  document.getElementById("typography").innerHTML = json[3].description;
+		  document.getElementById("titleCard").innerHTML = json[3].title;
+        
+		  console.log(json);x=json})
+	  }, []);
   return (
     <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
+      <CardHeader 
         avatar={
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
             M
@@ -48,6 +57,7 @@ export default function RecipeReviewCard() {
         }
         title="Shrimp and Chorizo Paella"
         subheader="September 14, 2016"
+        id="titleCard"
       />
       <CardMedia
         component="img"
@@ -55,10 +65,8 @@ export default function RecipeReviewCard() {
             src="https://our.warwick.ac.uk/wp-content/uploads/2021/03/Screenshot-2021-03-21-at-14.38.01-1024x527.png"        alt="Math"
       />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+        <Typography id="typography" variant="body2" color="text.secondary">
+        Override is here
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -81,25 +89,15 @@ export default function RecipeReviewCard() {
         <CardContent>
           <Typography paragraph>Method:</Typography>
           <Typography paragraph>
-            Heat 1/2 cup of the broth in a pot until simmering, add saffron and set
-            aside for 10 minutes.
+          Vector spaces are characterized by their dimension, which, roughly speaking, specifies the number of independent directions in the space. 
           </Typography>
           <Typography paragraph>
-            Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over
-            medium-high heat. Add chicken, shrimp and chorizo, and cook, stirring
-            occasionally until lightly browned, 6 to 8 minutes. Transfer shrimp to a
-            large plate and set aside, leaving chicken and chorizo in the pan. Add
-            pimentón, bay leaves, garlic, tomatoes, onion, salt and pepper, and cook,
-            stirring often until thickened and fragrant, about 10 minutes. Add
-            saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
+          In mathematics and physics, a vector space (also called a linear space) is a set whose elements, often called vectors, may be added together and multiplied ("scaled") by numbers called scalars. Scalars are often real numbers, but can be complex numbers or, more generally, elements of any field. The operations of vector addition and scalar multiplication must satisfy certain requirements, called vector axioms. The terms real vector space and complex vector space are often used to specify the nature of the scalars: real coordinate space or complex coordinate space.
+
+Vector spaces generalize Euclidean vectors, which allow modeling of physical quantities, such as forces and velocity, that have not only a magnitude, but also a direction. The concept of vector spaces is fundamental for linear algebra, together with the concept of matrix, which allows computing in vector spaces. This provides a concise and synthetic way for manipulating and studying systems of linear equations.
           </Typography>
           <Typography paragraph>
-            Add rice and stir very gently to distribute. Top with artichokes and
-            peppers, and cook without stirring, until most of the liquid is absorbed,
-            15 to 18 minutes. Reduce heat to medium-low, add reserved shrimp and
-            mussels, tucking them down into the rice, and cook again without
-            stirring, until mussels have opened and rice is just tender, 5 to 7
-            minutes more. (Discard any mussels that don&apos;t open.)
+          Many vector spaces that are considered in mathematics are also endowed with other structures. This is the case of algebras, which include field extensions, polynomial rings, associative algebras and Lie algebras. This is also the case of topological vector spaces, which include function spaces, inner product spaces, normed spaces, Hilbert spaces and Banach spaces.
           </Typography>
           <Typography>
             Set aside off of the heat to let rest for 10 minutes, and then serve.

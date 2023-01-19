@@ -3,7 +3,7 @@ import { Op } from "sequelize";
 
 //Controller example with SQLite Database => Sequelize Querying
 
-// get all movies
+// get all students
 const getAllUsersFromDB = async (req, res) => {
   try {
     //The findAll() method will return your table rows as an array of objects.
@@ -15,12 +15,11 @@ const getAllUsersFromDB = async (req, res) => {
   }
 };
 
-// get all movies but only some columns
 const getAllUsersGenresFromDB = async (req, res) => {
   try {
     //The findAll() method will return your table rows as an array of objects.
     //The attributes key will limit the return value to specific columns of the records.
-    const students = await Student.findAll({ attributes: ["genre"] });
+    const students = await Student.findAll({ attributes: ["gender"] });
     return res.status(200).json(students);
   } catch (err) {
     res.status(500).json(err);
@@ -30,14 +29,14 @@ const getAllUsersGenresFromDB = async (req, res) => {
 // the ID is the primary key => findByPk() sequelize method
 const getUsersFromDBById = async (req, res) => {
   try {
-    const student = await Student.findByPk(req.params.movieId); // find by primary key => findByPK()
+    const student = await Student.findByPk(req.params.id); // find by primary key => findByPK()
     if (student) {
       return res.status(200).json(student);
     } else {
       // if no entity exists, null is returned;
       return res
         .status(404)
-        .json({ error: `Movie with id ${req.params.movieId} not found` });
+        .json({ error: `User with id ${req.params.id} not found` });
     }
   } catch (err) {
     res.status(500).json(err);
@@ -58,7 +57,7 @@ const insertMovieIntoDB = async (req, res) => {
 //UPDATE
 const updateMovieById = async (req, res) => {
   try {
-    const movie = await Student.findByPk(req.params.movieId);
+    const movie = await Student.findByPk(req.params.id);
     if (movie) {
       const updatedMovie = await movie.update(req.body); // update using the update() method provided by Sequelize on the returned PK object
       // OBS: update on the found object and not on the "Movie" model
@@ -67,7 +66,7 @@ const updateMovieById = async (req, res) => {
       // if no entity exists, null is returned;
       return res
         .status(404)
-        .json({ error: `Movie with id ${req.params.movieId} not found` });
+        .json({ error: `Student with id ${req.params.id} not found` });
     }
   } catch (err) {
     res.status(500).json(err);
@@ -77,7 +76,7 @@ const updateMovieById = async (req, res) => {
 //DELETE
 const deleteMovie = async (req, res) => {
   try {
-    const movie = await Student.findByPk(req.params.movieId); // find by primary key => findByPK()
+    const movie = await Student.findByPk(req.params.id); // find by primary key => findByPK()
     if (movie) {
       // destroy() is mapped to "DELETE ... FROM ..."
       await movie.destroy();
@@ -87,7 +86,7 @@ const deleteMovie = async (req, res) => {
       // if no entity exists, null is returned;
       return res
         .status(404)
-        .json({ error: `Movie with id ${req.params.movieId} not found` });
+        .json({ error: `Student with id ${req.params.id} not found` });
     }
   } catch (err) {
     res.status(500).json(err);

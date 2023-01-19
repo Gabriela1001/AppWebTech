@@ -15,12 +15,8 @@ return (
 		<Bars />
 
 		<NavMenu>
-		<NavLink to='/about' >
-			About
-		</NavLink>
-	
 		<NavLink to='/annual' >
-			Annual Report
+			See details about you
 		</NavLink>
 		<NavLink to='/team' >
 			Teams
